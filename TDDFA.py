@@ -32,7 +32,8 @@ class TDDFA(object):
 
         # load BFM
         self.bfm = BFMModel(
-            bfm_fp=kvs.get('bfm_fp', make_abs_path('configs/bfm_noneck_v3.pkl')),
+            bfm_fp=make_abs_path('configs/bfm_noneck_v3.pkl'),
+            # bfm_fp=kvs.get('bfm_fp', make_abs_path('configs/bfm_noneck_v3.pkl')),
             shape_dim=kvs.get('shape_dim', 40),
             exp_dim=kvs.get('exp_dim', 10)
         )
@@ -54,7 +55,7 @@ class TDDFA(object):
             size=self.size,
             mode=kvs.get('mode', 'small')
         )
-        model = load_model(model, kvs.get('checkpoint_fp'))
+        model = load_model(model, make_abs_path(kvs.get('checkpoint_fp')))
 
         if self.gpu_mode:
             cudnn.benchmark = True
